@@ -1,0 +1,6 @@
+[submodule "DVWA"]
+	path = DVWA
+	url = https://github.com/digininja/DVWA
+[submodule "src/DVWA"]
+	path = src/DVWA
+	url = https://github.com/digininja/DVWA

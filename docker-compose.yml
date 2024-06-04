@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  webserver:
+    container_name: dvwa
+    image: vulnerables/web-dvwa
+    ports:
+      - "8080:80"
+    depends_on:
+      - waf
+
+  waf:
+    build:
+      context: ./src/coraza-caddy/
+      dockerfile: Dockerfile
+    container_name: caddy
+    ports:
+      - "80:80"
+
