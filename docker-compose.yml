@@ -16,4 +16,5 @@ services:
     container_name: caddy
     ports:
       - "80:80"
-
+    volumes:
+      - /var/log/wefrei:/var/log/caddy/

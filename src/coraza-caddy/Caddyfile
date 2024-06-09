@@ -2,9 +2,24 @@
   debug
   auto_https off
   order coraza_waf first
-  log {
+  log log_console {
     format console
     level info
+  }
+  log log_fconsole {
+    format console
+    output file /var/log/waf.log
+  }
+  log log_json {
+    format json
+    level warn
+    output file /var/log/waf.json
+  }
+  log log_net {
+    format json
+    level warn
+    soft_start
+    output net 172.17.0.1:9191    # docker gateway
   }
 }
 
@@ -17,8 +32,6 @@
 		Include @owasp_crs/*.conf
     Include /opt/wefrei/*
 		SecRuleEngine On
-		SecDebugLog /dev/stdout
-		SecDebugLogLevel 9
 		SecRule REQUEST_URI "@streq /wefreiattack" "id:101,phase:1,t:lowercase,deny,status:403"
 		SecRule REQUEST_BODY "@rx wefreiattack" "id:102,phase:2,t:lowercase,deny,status:403"
 		SecRule RESPONSE_HEADERS::status "@rx 406" "id:103,phase:3,t:lowercase,deny,status:403"
