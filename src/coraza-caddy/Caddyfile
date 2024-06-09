@@ -18,8 +18,10 @@
   log log_net {
     format json
     level warn
-    soft_start
-    output net 172.17.0.1:9191    # docker gateway
+    output net 172.17.0.1:9191 {  # docker gateway
+      soft_start
+      dial_timeout 10
+    }    
   }
 }
 
